@@ -1,23 +1,18 @@
 {
-  "name": "truewords",
+  "name": "chainskills",
   "version": "1.0.0",
-  "description": "Blockchain app - send and share trusted messages according to time based rules.",
-  "main": "index.js",
+  "description": "",
+  "main": "truffle.js",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
+    "dev": "lite-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/arjunthandi76/truewords.git"
-  },
-  "author": "",
+  "author": "ChainSkills",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/arjunthandi76/truewords/issues"
-  },
-  "homepage": "https://github.com/arjunthandi76/truewords#readme",
-  "dependencies": {
-    "solc": "^0.4.18",
-    "web3": "^0.20.0"
+  "devDependencies": {
+    "lite-server": "^2.3.0"
   }
 }

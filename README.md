@@ -1,2 +1,0 @@
-# truewords
-Blockchain app
