@@ -30,6 +30,81 @@
           </div>
      </div>
 
+
+     <div class="col-md-12" id="message-list">
+       <div class="row">
+         <div class="col-lg-12">
+           <p id="account" class="welcome pull-right">0x01234567890123456789012345678901</p>
+           <p id="accountBalance" class="welcome pull-left">10 ETH</p>
+         </div>
+       </div>
+
+       <div class="row panel panel-default">
+         <div class="panel-heading clearfix">
+           <div class="panel-title">
+             <button class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#sellArticle">Post a new message</button>
+           </div>
+         </div>
+       </div>
+
+       <div id="messagesRow" class="row">
+         <!-- MESSAGES LOAD HERE -->
+       </div>
+     </div>
+   </div>
+
+
+   <div id="messageTemplate" style="display: none;">
+     <div class="row-lg-12">
+       <div class="panel panel-default panel-article">
+         <div class="panel-heading">
+           <h3 class="panel-title"></h3>
+         </div>
+         <div class="panel-body">
+           <strong>Message</strong>: <span class="message-description"></span><br/>
+           <strong>Posted by</strong>: <span class="message-source"></span><br/>
+         </div>
+       </div>
+     </div>
+   </div>
+
+   <!-- Modal form to sell an article -->
+   <div class="modal fade" id="postMessage" role="dialog">
+     <div class="modal-dialog">
+
+       <!-- Modal content-->
+       <div class="modal-content">
+         <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal">&times;</button>
+           <h4 class="modal-title">Post a message</h4>
+         </div>
+         <div class="modal-body">
+
+           <div class="row">
+             <div class="col-lg-12">
+               <form>
+                 <div class="form-group">
+                   <label for="message_subject">Subject</label>
+                   <input type="text" class="form-control" id="message_subject" placeholder="Enter the subject of your message">
+                 </div>
+
+                 <div class="form-group">
+                   <label for="description">Message</label>
+                   <textarea type="text" class="form-control vresize" id="message_description" placeholder="Input your message" maxlength="255"></textarea>
+                 </div>
+               </form>
+             </div>
+           </div>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-primary btn-success" data-dismiss="modal" onclick="">Submit</button>
+           <button type="button" class="btn" data-dismiss="modal">Close</button>
+         </div>
+       </div>
+
+     </div>
+   </div>
+
      <div id="footer" class="container">
           <nav class="navbar navbar-default navbar-fixed-bottom">
                <div class="navbar-inner navbar-content-center text-center">

@@ -17,6 +17,11 @@ contract TrueWords {
   mapping (uint => Message) public messages;
   uint messageCounter;
 
+  // constructor
+  function TrueWords() public {
+    postMessage("Arjun", "Default message", "This is a message set by default", true, 123);
+  }
+
   // events
   // LogPostMessage
   event LogPostMessage(
@@ -72,5 +77,14 @@ contract TrueWords {
       displayPublicMessages[j] = messageIds[j];
     }
     return displayPublicMessages;
+  }
+
+  // get a message
+  function getMessage() public view returns (
+    address _source,
+    string _subject,
+    string _message
+  ) {
+      return(_source, _subject, _message);
   }
 }
