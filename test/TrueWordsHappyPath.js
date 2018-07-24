@@ -26,6 +26,7 @@ contract('TrueWords', function(accounts){
       return trueWordsInstance.getNumberOfMessages();
     }).then(function(data) {
       assert.equal(data.toNumber(), 0, "number of messages must be zero");
+
       return trueWordsInstance.getPublicMessages();
     }).then(function(data){
       assert.equal(data.length, 0, "there shouldn't be any messages posted");
@@ -33,7 +34,7 @@ contract('TrueWords', function(accounts){
   });
 
   // post first message
-  it("should let us sell a first message", function() {
+  it("should let us post a first message", function() {
     return TrueWords.deployed().then(function(instance){
       trueWordsInstance = instance;
       return trueWordsInstance.postMessage(
@@ -66,7 +67,7 @@ contract('TrueWords', function(accounts){
     });
   });
 
-  // sell a second message
+  // Post a second message
   it("should let us post a second message", function() {
     return TrueWords.deployed().then(function(instance){
       trueWordsInstance = instance;

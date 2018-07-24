@@ -1,13 +1,19 @@
 pragma solidity ^0.4.18;
 
 contract TrueWords {
+
+  address source;
+  string sourceName;
+  string sourceSubject;
+  string sourceDescription;
+
   // custom types
   struct Message {
     uint id;
     address source;
     string sourceName;
-    string subject;
-    string message;
+    string sourceSubject;
+    string sourceMessage;
     bool isPublic;
     uint256 revealAtTime;
     // @TODO: Add AlertTo array of users who should be alerted after reveal time
@@ -36,11 +42,15 @@ contract TrueWords {
   function postMessage(string _sourceName, string _subject, string _message, bool _isPublic, uint256 _revealAtTime) public {
     // a new message
     messageCounter++;
+    source = msg.sender;
+    sourceName = _sourceName;
+    sourceSubject = _subject;
+    sourceDescription = _message;
 
     // store this message
     messages[messageCounter] = Message(
       messageCounter,
-      msg.sender,
+      source,
       _sourceName,
       _subject,
       _message,
@@ -82,9 +92,10 @@ contract TrueWords {
   // get a message
   function getMessage() public view returns (
     address _source,
+    string _sourceName,
     string _subject,
     string _message
   ) {
-      return(_source, _subject, _message);
+      return(source, sourceName, sourceSubject, sourceDescription);
   }
 }
