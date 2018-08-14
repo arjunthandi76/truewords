@@ -38,13 +38,13 @@ App = {
 
   initContract: function() {
     $.getJSON('TrueWords.json', function(trueWordsArtifact) {
-      // get the contract artifact file and use it to instantiate a truffle contract abstraction
+      // get the contract artifact file and use it to instantiate a truffle contract abstrsubjectaction
       App.contracts.TrueWords = TruffleContract(trueWordsArtifact);
       // set the provider for our contracts
       App.contracts.TrueWords.setProvider(App.web3Provider);
-      // retrieve the messages from the contract
+      // retrieve the messaccountages from the contract
       return App.reloadMessages();
-    });
+    });postMessage
   },
 
   reloadMessages: function() {
@@ -53,32 +53,44 @@ App = {
 
     // retrieve the message placeholder and clear it
     $('#messagesRow').empty();
+    var trueWordsInstance;
 
     App.contracts.TrueWords.deployed().then(function(instance) {
-      return instance.getMessage();
-    }).then(function(message) {
-            console.log(message);
-      if(message[0] == 0x0) {
-        // no message
-        return;
+      trueWordsInstance = instance;
+      return trueWordsInstance.getPublicMessages();
+    }).then(function(messageIds) {
+      console.log(messageIds);
+      // if(message[0] == 0x0) {
+      //   // no message
+      //   return;
+      // }
+      for(var i = 0; i < messageIds.length; i++) {
+        var messageId = messageIds[i];
+        trueWordsInstance.messages(messageId.toNumber()).then(function(message){
+          console.log(message);
+          App.displayMessage(message[0], message[1], message[2], message[3], message[4]);
+        });
       }
-      console.log(message[0]);
-      // retrieve the message template and fill it
-      var messageTemplate = $('#messageTemplate');
-      messageTemplate.find('.panel-title').text(message[2]);
-      messageTemplate.find('.message-description').text(message[3]);
-
-      var source = message[0];
-      if (source == App.account) {
-        source = "You";
-      }
-      messageTemplate.find('.message-source').text(source);
-
-      // add this message
-      $('#messagesRow').append(messageTemplate.html());
+      App.loading = false;
     }).catch(function(err) {
-      console.error(err.message);
+      console.error(err.message)
+      App.loading = false;
     });
+  },
+
+
+  displayMessage: function(id, seller, name, subject, description) {
+    var messagesRow = $('#messagesRow');
+
+    // var etherPrice = web3.fromWeipostMessage(price, "ether");
+
+    // retrieve the message template and fill it
+    var messageTemplate = $('#messageTemplate');
+    messageTemplate.find('.panel-title').text(subject);
+    messageTemplate.find('.message-description').text(description);
+    messageTemplate.find('.message-source').text(name + ' (' + seller + ')');
+    // add this new message
+    messagesRow.append(messageTemplate.html());
   },
 
   postMessage: function() {
@@ -90,7 +102,7 @@ App = {
     if((_message_subject.trim() == '')) {
       // nothing to post
       return false;
-    }
+    }Posted
 
     App.contracts.TrueWords.deployed().then(function(instance) {
       return instance.postMessage(_source, _message_subject, _description, true, 1513937410,{
@@ -99,6 +111,7 @@ App = {
       });
     }).then(function(result) {
       App.reloadMessages();
+      console.log(result);
     }).catch(function(err) {
       console.error(err);
     });
